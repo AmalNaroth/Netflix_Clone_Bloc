@@ -4,6 +4,7 @@ import 'package:netflix_clone/presentation/games_screen/screen_games.dart';
 import 'package:netflix_clone/presentation/home_screen/screen_home.dart';
 import 'package:netflix_clone/presentation/main_page/widgets/bottom_navigationbar.dart';
 import 'package:netflix_clone/presentation/news&hot_screen/news&hot_screen.dart';
+import 'package:netflix_clone/presentation/search_screen/search_screen.dart';
 
 ValueNotifier<int> bottomNavBarNotifier = ValueNotifier(0);
 
@@ -16,7 +17,8 @@ class ScreenMainPage extends StatelessWidget {
     const ScreenHome(),
     const ScreenGames(),
     const ScreenNewsAndHot(),
-     ScreenDownload()
+    const ScreenSearch(),
+    ScreenDownload()
   ];
 
   @override
@@ -29,7 +31,8 @@ class ScreenMainPage extends StatelessWidget {
             return screen[value];
           },
         ),
-      )
-      ,bottomNavigationBar: CustomBottomNavigationBar());
+      ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
+    );
   }
 }
