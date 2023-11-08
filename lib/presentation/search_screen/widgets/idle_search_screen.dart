@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constants/constants.dart';
+import 'package:netflix_clone/presentation/search_screen/widgets/search_titile_text_widget.dart';
 
 class IdleSearchScreen extends StatelessWidget {
   const IdleSearchScreen({super.key});
 
+  final imageLIst =
+      "https://image.tmdb.org/t/p/w500/dZbLqRjjiiNCpTYzhzL2NMvz4J0.jpg";
+
   @override
   Widget build(BuildContext context) {
+    final mwidth = MediaQuery.of(context).size.width;
     return Column(
       //crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(children: [
-          Expanded(
-            child: Text(
-              "Top searchs",
-              textAlign: TextAlign.start,
-            ),
-          )
-        ]),
+        fHight20,
+        searchTextTitle(titleText: "Top Searches"),
+        fHight20,
         Expanded(
           child: ListView.separated(
               //shrinkWrap: true,
@@ -24,9 +24,26 @@ class IdleSearchScreen extends StatelessWidget {
                 return Row(
                   children: [
                     Container(
-                      color: Colors.red,
-                      height: 50,
-                      width: 100,
+                      height: mwidth * .20,
+                      width: mwidth * .35,
+                      decoration: BoxDecoration(
+                        //color: Colors.red,
+                        image: DecorationImage(
+                          image: NetworkImage(imageLIst),
+                        ),
+                      ),
+                    ),
+                    fWidth20,
+                    const Expanded(
+                      child: Text("Movie Name"),
+                    ),
+                    const CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.white,
+                      child: CircleAvatar(
+                        radius: 18.5,
+                        child: Icon(Icons.play_arrow),
+                      ),
                     )
                   ],
                 );
