@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constants/constants.dart';
+import 'package:netflix_clone/presentation/news&hot_screen/widgets/comming_soon_widget.dart';
+import 'package:netflix_clone/presentation/news&hot_screen/widgets/every_one_watching_widget.dart';
 
 class ScreenNewsAndHot extends StatelessWidget {
   const ScreenNewsAndHot({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final mwidth = MediaQuery.of(context).size.width;
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -26,11 +29,10 @@ class ScreenNewsAndHot extends StatelessWidget {
               )
             ],
             bottom: TabBar(
+              padding: EdgeInsets.symmetric(horizontal: 10),
               labelColor: Colors.black,
-              labelStyle: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold
-              ),
+              labelStyle:
+                  const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               unselectedLabelColor: Colors.white,
               isScrollable: true,
               indicator: BoxDecoration(
@@ -50,9 +52,26 @@ class ScreenNewsAndHot extends StatelessWidget {
         ),
         body: TabBarView(
           children: [
-          Text("mnckdmv"),
-          Text("5262"),
-        ]),
+            ListView.separated(
+                padding: const EdgeInsets.all(10),
+                itemBuilder: (context, index) {
+                  return const ComminSoonWidget();
+                },
+                separatorBuilder: (context, index) {
+                  return fHight10;
+                },
+                itemCount: 10),
+            ListView.separated(
+                padding: const EdgeInsets.all(10),
+                itemBuilder: (context, index) {
+                  return const EveryOneWatchingWidget();
+                },
+                separatorBuilder: (context, index) {
+                  return fHight10;
+                },
+                itemCount: 10),
+          ],
+        ),
       ),
     );
   }
