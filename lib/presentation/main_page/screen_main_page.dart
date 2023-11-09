@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/presentation/download_screen/download_screen.dart';
-import 'package:netflix_clone/presentation/games_screen/screen_games.dart';
+import 'package:netflix_clone/presentation/fase_laugh_screen/fast_laugh_screen.dart';
 import 'package:netflix_clone/presentation/home_screen/screen_home.dart';
 import 'package:netflix_clone/presentation/main_page/widgets/bottom_navigationbar.dart';
 import 'package:netflix_clone/presentation/news&hot_screen/news&hot_screen.dart';
@@ -14,9 +14,9 @@ class ScreenMainPage extends StatelessWidget {
   static const screenMainPage = "Screen-Main-Page";
 
   final screen = [
-    const ScreenHome(),
-    const ScreenGames(),
+     ScreenHome(),
     const ScreenNewsAndHot(),
+     const FastLaughScreen(),
     const ScreenSearch(),
     ScreenDownload()
   ];

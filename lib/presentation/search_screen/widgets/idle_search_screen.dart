@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constants/constants.dart';
-import 'package:netflix_clone/presentation/search_screen/widgets/search_titile_text_widget.dart';
+import 'package:netflix_clone/presentation/widgets/main_titile_widget.dart';
 
 class IdleSearchScreen extends StatelessWidget {
   const IdleSearchScreen({super.key});
@@ -15,7 +15,7 @@ class IdleSearchScreen extends StatelessWidget {
       //crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         fHight20,
-        searchTextTitle(titleText: "Top Searches"),
+        MainTitleWidget(titleText: "Top Searches",textSize: 28),
         fHight20,
         Expanded(
           child: ListView.separated(

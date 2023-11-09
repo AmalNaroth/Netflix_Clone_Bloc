@@ -25,9 +25,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
                   label: "Home",
                 ),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.sports_esports), label: "Games"),
-                BottomNavigationBarItem(
                     icon: Icon(Icons.shop_2_outlined), label: "New & Hot"),
+                BottomNavigationBarItem(
+                    icon: Icon(Icons.emoji_emotions), label: "Fase laugh"),
                 BottomNavigationBarItem(
                     icon: Icon(Icons.search), label: "Search"),
                 BottomNavigationBarItem(

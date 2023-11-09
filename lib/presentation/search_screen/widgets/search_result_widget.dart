@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constants/constants.dart';
-import 'package:netflix_clone/presentation/search_screen/widgets/search_titile_text_widget.dart';
+import 'package:netflix_clone/presentation/widgets/main_titile_widget.dart';
+import 'package:netflix_clone/presentation/widgets/common_image_card_wiget.dart';
 
 class SearchResultWidget extends StatelessWidget {
   const SearchResultWidget({super.key});
@@ -14,7 +15,7 @@ class SearchResultWidget extends StatelessWidget {
     return Column(
       children: [
         fHight20,
-        searchTextTitle(titleText: "Movies & Tv"),
+        MainTitleWidget(titleText: "Movies & Tv",textSize: 28),
         fHight20,
         Expanded(
             child: GridView.count(
@@ -37,30 +38,3 @@ class SearchResultWidget extends StatelessWidget {
   }
 }
 
-class CommonImageWidget extends StatelessWidget {
-  const CommonImageWidget({
-    super.key,
-    required this.imageLink,
-    required this.imageSize,
-  });
-
-  final Size imageSize;
-
-  final String imageLink;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 30,
-      //width: imageSize.width,
-      decoration: BoxDecoration(
-        color: Colors.red,
-        image: DecorationImage(
-          image: NetworkImage(imageLink),
-          fit: BoxFit.cover,
-        ),
-        borderRadius: BorderRadius.circular(10)
-      ),
-    );
-  }
-}

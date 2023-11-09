@@ -27,7 +27,8 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: backgoundColor,
           bottomNavigationBarTheme: const BottomNavigationBarThemeData()
               .copyWith(backgroundColor: backgoundColor),
-          iconTheme: const IconThemeData(color: whiteColor)),
+          iconTheme: const IconThemeData(color: whiteColor),
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.transparent)),
       routes: {ScreenMainPage.screenMainPage: (context) => ScreenMainPage()},
     );
   }
