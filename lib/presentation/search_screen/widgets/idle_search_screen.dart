@@ -15,7 +15,7 @@ class IdleSearchScreen extends StatelessWidget {
       //crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         fHight20,
-        MainTitleWidget(titleText: "Top Searches",textSize: 28),
+        MainTitleWidget(titleText: "Top Searches", textSize: 28),
         fHight20,
         Expanded(
           child: ListView.separated(

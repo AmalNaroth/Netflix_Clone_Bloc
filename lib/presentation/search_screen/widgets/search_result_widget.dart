@@ -15,20 +15,20 @@ class SearchResultWidget extends StatelessWidget {
     return Column(
       children: [
         fHight20,
-        MainTitleWidget(titleText: "Movies & Tv",textSize: 28),
+        MainTitleWidget(titleText: "Movies & Tv", textSize: 28),
         fHight20,
         Expanded(
             child: GridView.count(
           crossAxisCount: 3,
           mainAxisSpacing: 8,
           crossAxisSpacing: 8,
-          childAspectRatio: 1/1.4,
+          childAspectRatio: 1 / 1.4,
           children: List.generate(
             20,
             (index) {
               return CommonImageWidget(
                 imageLink: imageLink,
-                imageSize:const Size(0, 0),
+                imageSize: const Size(0, 0),
               );
             },
           ),
@@ -37,4 +37,3 @@ class SearchResultWidget extends StatelessWidget {
     );
   }
 }
-

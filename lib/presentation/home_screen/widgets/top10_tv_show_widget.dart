@@ -46,9 +46,10 @@ class Top10TvShows extends StatelessWidget {
                       strokeColor: Colors.white,
                       child: Text(
                         "${index + 1}",
-                        style:const TextStyle(fontSize: 150,
-                        decoration: TextDecoration.none,
-                        color: Colors.black),
+                        style: const TextStyle(
+                            fontSize: 150,
+                            decoration: TextDecoration.none,
+                            color: Colors.black),
                       ),
                     ),
                   ),

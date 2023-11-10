@@ -7,7 +7,7 @@ class ComminSoonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final mwidth = MediaQuery.of(context).size.width;
-    return  Column(
+    return Column(
       children: [
         SizedBox(
           width: double.infinity,

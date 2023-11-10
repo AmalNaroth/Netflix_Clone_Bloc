@@ -17,13 +17,12 @@ class CommonImageWidget extends StatelessWidget {
       height: imageSize.height,
       width: imageSize.width,
       decoration: BoxDecoration(
-        color: Colors.red,
-        image: DecorationImage(
-          image: NetworkImage(imageLink),
-          fit: BoxFit.cover,
-        ),
-        borderRadius: BorderRadius.circular(10)
-      ),
+          color: Colors.red,
+          image: DecorationImage(
+            image: NetworkImage(imageLink),
+            fit: BoxFit.cover,
+          ),
+          borderRadius: BorderRadius.circular(10)),
     );
   }
 }

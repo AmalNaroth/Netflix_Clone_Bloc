@@ -49,7 +49,10 @@ class EveryOneWatchingWidget extends StatelessWidget {
           children: [
             Column(
               children: [
-                Icon(Icons.share_outlined,size: 35,),
+                Icon(
+                  Icons.share_outlined,
+                  size: 35,
+                ),
                 Text(
                   "Share",
                   style: TextStyle(color: Colors.grey, fontSize: 10),
@@ -59,7 +62,10 @@ class EveryOneWatchingWidget extends StatelessWidget {
             fWidth10,
             Column(
               children: [
-                Icon(Icons.add,size: 40,),
+                Icon(
+                  Icons.add,
+                  size: 40,
+                ),
                 Text(
                   "My List",
                   style: TextStyle(color: Colors.grey, fontSize: 10),
@@ -69,7 +75,10 @@ class EveryOneWatchingWidget extends StatelessWidget {
             fWidth10,
             Column(
               children: [
-                Icon(Icons.play_arrow,size: 40,),
+                Icon(
+                  Icons.play_arrow,
+                  size: 40,
+                ),
                 Text(
                   "Play",
                   style: TextStyle(color: Colors.grey, fontSize: 10),

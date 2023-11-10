@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constants/constants.dart';
-import 'package:netflix_clone/presentation/fase_laugh_screen/widgets/fast_laugh_action_widget.dart';
-import 'package:netflix_clone/presentation/fase_laugh_screen/widgets/video_tile_widget.dart';
+import 'package:netflix_clone/presentation/fast_laugh_screen/widgets/fast_laugh_action_widget.dart';
+import 'package:netflix_clone/presentation/fast_laugh_screen/widgets/video_tile_widget.dart';
 
 class FastLaughScreen extends StatelessWidget {
   const FastLaughScreen({super.key});
@@ -22,4 +22,3 @@ class FastLaughScreen extends StatelessWidget {
     );
   }
 }
-

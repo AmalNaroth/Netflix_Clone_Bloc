@@ -12,7 +12,7 @@ class MainTitleWidget extends StatelessWidget {
         child: Text(
           titleText,
           textAlign: TextAlign.start,
-          style:  TextStyle(fontWeight: FontWeight.bold, fontSize: textSize),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: textSize),
         ),
       ),
     ]);
