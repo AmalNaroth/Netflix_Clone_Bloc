@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_clone/application/search/search_bloc.dart';
+import 'package:netflix_clone/core/api/api_doc.dart';
 import 'package:netflix_clone/core/constants/constants.dart';
+import 'package:netflix_clone/presentation/search_screen/widgets/top_search_tile.dart';
 import 'package:netflix_clone/presentation/widgets/main_titile_widget.dart';
 
 class IdleSearchScreen extends StatelessWidget {
   const IdleSearchScreen({super.key});
-
-  final imageLIst =
-      "https://image.tmdb.org/t/p/w500/dZbLqRjjiiNCpTYzhzL2NMvz4J0.jpg";
 
   @override
   Widget build(BuildContext context) {
@@ -18,40 +19,37 @@ class IdleSearchScreen extends StatelessWidget {
         MainTitleWidget(titleText: "Top Searches", textSize: 28),
         fHight20,
         Expanded(
-          child: ListView.separated(
-              //shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return Row(
-                  children: [
-                    Container(
-                      height: mwidth * .20,
-                      width: mwidth * .35,
-                      decoration: BoxDecoration(
-                        //color: Colors.red,
-                        image: DecorationImage(
-                          image: NetworkImage(imageLIst),
-                        ),
-                      ),
-                    ),
-                    fWidth20,
-                    const Expanded(
-                      child: Text("Movie Name"),
-                    ),
-                    const CircleAvatar(
-                      radius: 20,
-                      backgroundColor: Colors.white,
-                      child: CircleAvatar(
-                        radius: 18.5,
-                        child: Icon(Icons.play_arrow),
-                      ),
-                    )
-                  ],
+          child: BlocBuilder<SearchBloc, SearchState>(
+            builder: (context, state) {
+              if (state.isLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(),
                 );
-              },
-              separatorBuilder: (context, index) {
-                return fHight20;
-              },
-              itemCount: 20),
+              } else if (state.isError) {
+                return const Center(
+                  child: Text("Error found"),
+                );
+              } else if (state.idleMovie.isEmpty) {
+                return const Center(
+                  child: Text("No data found"),
+                );
+              }
+              return ListView.separated(
+                  //shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    final imageData ="$imageBaseUrl${state.idleMovie[index].backdropPath}"; 
+                    return TopSeachTile(
+                      mwidth: mwidth,
+                      imageUrl:imageData,
+                      title: state.idleMovie[index].movieTitile,
+                    );
+                  },
+                  separatorBuilder: (context, index) {
+                    return fHight20;
+                  },
+                  itemCount: state.idleMovie.length);
+            },
+          ),
         )
       ],
     );

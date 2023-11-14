@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:netflix_clone/application/bloc/download_bloc.dart';
+import 'package:netflix_clone/application/downloads/download_bloc.dart';
 import 'package:netflix_clone/core/api/api_doc.dart';
 import 'package:netflix_clone/core/colors/colors.dart';
 import 'package:netflix_clone/core/constants/constants.dart';
@@ -133,7 +133,7 @@ class Section02 extends StatelessWidget {
                             children: [
                               DownloadsImageWidget(
                                 imagesLink:
-                                    "$imageBaseUrl${state.downloads[0].posterPath!}",
+                                    "$imageBaseUrl${state.downloads[0].posterPath}",
                                 rotateAngle: -20,
                                 marginSize: const EdgeInsets.only(
                                     bottom: 20, right: 130),
@@ -141,7 +141,7 @@ class Section02 extends StatelessWidget {
                               ),
                               DownloadsImageWidget(
                                 imagesLink:
-                                    '$imageBaseUrl${state.downloads[1].posterPath!}',
+                                    '$imageBaseUrl${state.downloads[1].posterPath}',
                                 rotateAngle: 20,
                                 marginSize: const EdgeInsets.only(
                                     bottom: 20, left: 130),
@@ -149,7 +149,7 @@ class Section02 extends StatelessWidget {
                               ),
                               DownloadsImageWidget(
                                 imagesLink:
-                                    '$imageBaseUrl${state.downloads[2].posterPath!}',
+                                    '$imageBaseUrl${state.downloads[2].posterPath}',
                                 marginSize: const EdgeInsets.only(top: 10),
                                 size: Size(mWidth * .50, mWidth * .65),
                               ),

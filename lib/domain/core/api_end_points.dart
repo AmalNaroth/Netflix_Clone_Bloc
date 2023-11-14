@@ -5,5 +5,5 @@ class ApiEndPoints {
   static const downloads =
       "${baseUrl}movie/popular?api_key=$apiKey$commonEndUrl";
 
-      static const search = "${baseUrl}search/movie?api_key=$apiKey&query=";
+  static const search = "${baseUrl}search/movie?api_key=$apiKey&";
 }

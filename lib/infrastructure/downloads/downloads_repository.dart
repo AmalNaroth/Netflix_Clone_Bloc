@@ -13,7 +13,7 @@ class DownloadsRepository implements IdownloadsRepo {
     try {
       final Response reponse = await Dio(
         BaseOptions(),
-      ).get(ApiEndPoints.downloads);
+      ).get(ApiEndPoints.downloads,);
       if (reponse.statusCode == 200 || reponse.statusCode == 201) {
         final downloadsList = (reponse.data['results'] as List).map(
           (e) {

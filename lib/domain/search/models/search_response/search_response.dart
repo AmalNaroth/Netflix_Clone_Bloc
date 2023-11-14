@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:netflix_clone/core/api/api_doc.dart';
 part 'search_response.g.dart';
 
 @JsonSerializable()
@@ -26,6 +27,9 @@ class SearchReponseData {
   String? originalTitle;
   @JsonKey(name: 'poster_path')
   String? posterPath;
+
+  String get backdropPathImageGet => "$imageBaseUrl$backdropPath";
+  String get posterPathImageGet => "$imageBaseUrl$posterPath";
 
   SearchReponseData({
     this.backdropPath,

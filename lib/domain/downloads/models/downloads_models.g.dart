@@ -8,10 +8,14 @@ part of 'downloads_models.dart';
 
 _$DownloadsImpl _$$DownloadsImplFromJson(Map<String, dynamic> json) =>
     _$DownloadsImpl(
-      posterPath: json['poster_path'] as String?,
+      posterPath: json['poster_path'] as String,
+      movieTitile: json['original_title'] as String,
+      backdropPath: json['backdrop_path'] as String,
     );
 
 Map<String, dynamic> _$$DownloadsImplToJson(_$DownloadsImpl instance) =>
     <String, dynamic>{
       'poster_path': instance.posterPath,
+      'original_title': instance.movieTitile,
+      'backdrop_path': instance.backdropPath,
     };
