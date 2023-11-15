@@ -11,6 +11,6 @@ class SearchState with _$SearchState {
 
   factory SearchState.initial() {
     return const SearchState(
-        idleMovie: [], searchReult: [], isLoading: false, isError: false);
+        idleMovie: [], searchReult: [], isLoading: true, isError: false);
   }
 }

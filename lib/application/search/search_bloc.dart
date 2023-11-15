@@ -19,18 +19,18 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     this._idownloadServices,
     this._searchServices,
   ) : super(SearchState.initial()) {
-    if (state.idleMovie.isNotEmpty) {
-      emit(
-        state.copyWith(searchReult: [], isLoading: true, isError: false),
-      );
-      return;
-    }
     on<_SearchInitilize>(
       (event, emit) async {
-        emit(
-          const SearchState(
-              idleMovie: [], searchReult: [], isLoading: true, isError: false),
-        );
+        if (state.idleMovie.isNotEmpty) {
+          emit(
+            state.copyWith(searchReult: [], isLoading: false),
+          );
+          return;
+        } else {
+          emit(
+            state.copyWith(searchReult: [], isLoading: true),
+          );
+        }
         final _result = await _idownloadServices.getDownloadItems();
         _result.fold(
           (failure) {
