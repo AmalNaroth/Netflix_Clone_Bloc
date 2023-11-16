@@ -1,13 +1,14 @@
 import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constants/constants.dart';
+import 'package:netflix_clone/domain/new&hot/models/everyone_watching_models/result.dart';
 import 'package:netflix_clone/presentation/widgets/common_image_card_wiget.dart';
 import 'package:netflix_clone/presentation/widgets/main_titile_widget.dart';
 
 class Top10TvShows extends StatelessWidget {
   String movieTitle;
-  String imageLink;
-  Top10TvShows({super.key, required this.movieTitle, required this.imageLink});
+  List<HotandNewModelData> data;
+  Top10TvShows({super.key, required this.movieTitle, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class Top10TvShows extends StatelessWidget {
                         //color: Colors.green,
                       ),
                       CommonImageWidget(
-                        imageLink: imageLink,
+                        imageLink: data[index].getPosterPath,
                         imageSize: Size(mwidth * .35, mwidth * .53),
                       ),
                     ],

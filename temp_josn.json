@@ -1,26 +1,23 @@
 {
-    "results": [
-      
-      {
-        "adult": false,
-        "backdrop_path": "/zlpZzccypkAYFZIyYLQcchl90ZC.jpg",
-        "genre_ids": [
-          878,
-          28,
-          80,
-          10770
-        ],
-        "id": 225914,
-        "original_language": "en",
-        "original_title": "Spider-Man",
-        "overview": "When an extortionist threatens to force a multi-suicide unless a huge ransom is paid, only Peter Parker can stop him with his new powers as Spider-Man.",
-        "popularity": 12.988,
-        "poster_path": "/jNxRHZ2cxVkNRtxgHuCtv7GY4JP.jpg",
-        "release_date": "1977-09-14",
-        "title": "Spider-Man",
-        "video": false,
-        "vote_average": 5.953,
-        "vote_count": 139
-      }
-    ]
-  }
+  "results": [
+    {
+      "backdrop_path": "/jWXrQstj7p3Wl5MfYWY6IHqRpDb.jpg",
+      "first_air_date": "1952-12-26",
+      "genre_ids": [
+        10763
+      ],
+      "id": 94722,
+      "name": "Tagesschau",
+      "origin_country": [
+        "DE"
+      ],
+      "original_language": "de",
+      "original_name": "Tagesschau",
+      "overview": "German daily news program, the oldest still existing program on German television.",
+      "popularity": 4393.918,
+      "poster_path": "/7dFZJ2ZJJdcmkp05B9NWlqTJ5tq.jpg",
+      "vote_average": 7.2,
+      "vote_count": 163
+    }
+  ]
+}

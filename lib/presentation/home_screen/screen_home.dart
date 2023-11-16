@@ -1,148 +1,159 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netflix_clone/application/home/home_screen_bloc.dart';
 import 'package:netflix_clone/core/constants/constants.dart';
+import 'package:netflix_clone/domain/new&hot/models/everyone_watching_models/result.dart';
 import 'package:netflix_clone/presentation/home_screen/widgets/home_page_movie_list.dart';
 import 'package:netflix_clone/presentation/home_screen/widgets/top10_tv_show_widget.dart';
 
 ValueNotifier<bool> scrollNotifier = ValueNotifier(true);
 
 class ScreenHome extends StatelessWidget {
-  ScreenHome({Key? key}) : super(key: key);
-
-  List<Widget> _homeScreenWidgets = [
-    HomePageMovieList(
-      imageLink:
-          "https://image.tmdb.org/t/p/w500/aTvePCU7exLepwg5hWySjwxojQK.jpg",
-      movieTitle: "Released in the Past Year",
-    ),
-    HomePageMovieList(
-      imageLink:
-          "https://image.tmdb.org/t/p/w500/aTvePCU7exLepwg5hWySjwxojQK.jpg",
-      movieTitle: "Trending Now",
-    ),
-    Top10TvShows(
-      movieTitle: "Top 10 Tv Shows In India Today",
-      imageLink:
-          "https://image.tmdb.org/t/p/w500/b0Ej6fnXAP8fK75hlyi2jKqdhHz.jpg",
-    ),
-    HomePageMovieList(
-      imageLink:
-          "https://image.tmdb.org/t/p/w500/aTvePCU7exLepwg5hWySjwxojQK.jpg",
-      movieTitle: "Tense Drama",
-    ),
-    HomePageMovieList(
-      imageLink:
-          "https://image.tmdb.org/t/p/w500/aTvePCU7exLepwg5hWySjwxojQK.jpg",
-      movieTitle: "South Indian Cinema",
-    ),
-  ];
+  const ScreenHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      BlocProvider.of<HomeScreenBloc>(context)
+          .add(const HomeScreenEvent.initialized());
+    });
     final mwidth = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: ValueListenableBuilder(
-        valueListenable: scrollNotifier,
-        builder: (BuildContext context, bool scrollValue, Widget? _) {
-          return NotificationListener<UserScrollNotification>(
-            onNotification: (notification) {
-              final ScrollDirection direction = notification.direction;
-              if (direction == ScrollDirection.reverse) {
-                scrollNotifier.value = false;
-                scrollNotifier.notifyListeners();
-              } else if (direction == ScrollDirection.forward) {
-                scrollNotifier.value = true;
-                scrollNotifier.notifyListeners();
-              }
-              return true;
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Stack(
-                children: [
-                  ListView(
+    return BlocBuilder<HomeScreenBloc, HomeScreenState>(
+      builder: (context, state) {
+        if (state.isError) {
+          return const Center(
+            child: Text("Error occure"),
+          );
+        } else if (state.isLoading) {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: Colors.red,
+              strokeWidth: 2,
+            ),
+          );
+        }
+        return Scaffold(
+          body: ValueListenableBuilder(
+            valueListenable: scrollNotifier,
+            builder: (BuildContext context, bool scrollValue, Widget? _) {
+              return NotificationListener<UserScrollNotification>(
+                onNotification: (notification) {
+                  final ScrollDirection direction = notification.direction;
+                  if (direction == ScrollDirection.reverse) {
+                    scrollNotifier.value = false;
+                    scrollNotifier.notifyListeners();
+                  } else if (direction == ScrollDirection.forward) {
+                    scrollNotifier.value = true;
+                    scrollNotifier.notifyListeners();
+                  }
+                  return true;
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Stack(
                     children: [
-                      BackgroundCardWidget(mwidth: mwidth),
-                      ListView.separated(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return _homeScreenWidgets[index];
-                        },
-                        separatorBuilder: (context, index) =>
-                            SizedBox(height: 20),
-                        itemCount: _homeScreenWidgets.length,
+                      ListView(
+                        children: [
+                          BackgroundCardWidget(
+                              mwidth: mwidth,
+                              imageUrl:
+                                  state.sountIndianCinemaList[0].getPosterPath),
+                          ListView.separated(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              HomeScreenWidgetList widgetList =
+                                  HomeScreenWidgetList(
+                                releasedList: state.realsedInthePastList,
+                                trendingList: state.trendingNowList,
+                                topTenList: state.topTenList,
+                                tenseList: state.tenseDramaList,
+                                southIndianList: state.sountIndianCinemaList,
+                              );
+                              return widgetList.homeScreenWidgets[index];
+                            },
+                            separatorBuilder: (context, index) => fHight20,
+                            itemCount: HomeScreenWidgetList(
+                              releasedList: state.realsedInthePastList,
+                              trendingList: state.trendingNowList,
+                              topTenList: state.topTenList,
+                              tenseList: state.tenseDramaList,
+                              southIndianList: state.sountIndianCinemaList,
+                            ).homeScreenWidgets.length,
+                          )
+                        ],
                       ),
-                    ],
-                  ),
-                  scrollValue
-                      ? AnimatedContainer(
-                          duration: Duration(milliseconds: 1000),
-                          padding: EdgeInsets.all(10),
-                          width: double.infinity,
-                          height: 100,
-                          color: Colors.black.withOpacity(0.4),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
+                      scrollValue
+                          ? AnimatedContainer(
+                              duration: const Duration(milliseconds: 1000),
+                              padding: const EdgeInsets.all(10),
+                              width: double.infinity,
+                              height: 100,
+                              color: Colors.black.withOpacity(0.4),
+                              child: Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Image.asset(
-                                    "assets/images/N-logo.png",
-                                    height: 50,
-                                  ),
                                   Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Icon(Icons.cast),
-                                      fWidth20,
-                                      Container(
-                                        color: Colors.blue,
-                                        height: 30,
-                                        width: 30,
+                                      Image.asset(
+                                        "assets/images/N-logo.png",
+                                        height: 50,
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Icon(Icons.cast),
+                                          fWidth20,
+                                          Container(
+                                            color: Colors.blue,
+                                            height: 30,
+                                            width: 30,
+                                          )
+                                        ],
                                       )
                                     ],
-                                  )
+                                  ),
+                                  const Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text(
+                                        "TV Shows",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      Text(
+                                        "Movies",
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      Text(
+                                        "Categories",
+                                        style: TextStyle(fontSize: 16),
+                                      )
+                                    ],
+                                  ),
                                 ],
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    "TV Shows",
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                  Text(
-                                    "Movies",
-                                    style: TextStyle(fontSize: 16),
-                                  ),
-                                  Text(
-                                    "Categories",
-                                    style: TextStyle(fontSize: 16),
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
-                      : const SizedBox(),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
+                            )
+                          : const SizedBox(),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }
 
 class BackgroundCardWidget extends StatelessWidget {
-  const BackgroundCardWidget({
-    super.key,
-    required this.mwidth,
-  });
+  String imageUrl;
+  BackgroundCardWidget(
+      {super.key, required this.mwidth, required this.imageUrl});
 
   final double mwidth;
 
@@ -155,9 +166,7 @@ class BackgroundCardWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: Colors.red,
             image: DecorationImage(
-                image: NetworkImage(
-                    "https://image.tmdb.org/t/p/w500/aTvePCU7exLepwg5hWySjwxojQK.jpg"),
-                fit: BoxFit.cover),
+                image: NetworkImage(imageUrl), fit: BoxFit.cover),
           ),
         ),
         Positioned(
@@ -200,5 +209,34 @@ class BackgroundCardWidget extends StatelessWidget {
         )
       ],
     );
+  }
+}
+
+class HomeScreenWidgetList {
+  List<HotandNewModelData> releasedList;
+  List<HotandNewModelData> trendingList;
+  List<HotandNewModelData> topTenList;
+  List<HotandNewModelData> tenseList;
+  List<HotandNewModelData> southIndianList;
+
+  HomeScreenWidgetList({
+    required this.releasedList,
+    required this.trendingList,
+    required this.topTenList,
+    required this.tenseList,
+    required this.southIndianList,
+  });
+
+  List<Widget> get homeScreenWidgets {
+    return [
+      HomePageMovieList(
+          data: releasedList, movieTitle: "Released in the Past Year"),
+      HomePageMovieList(data: trendingList, movieTitle: "Trending Now"),
+      Top10TvShows(
+          data: topTenList, movieTitle: "Top 10 Tv Shows In India Today"),
+      HomePageMovieList(data: tenseList, movieTitle: "Tense Drama"),
+      HomePageMovieList(
+          data: southIndianList, movieTitle: "South Indian Cinema"),
+    ];
   }
 }

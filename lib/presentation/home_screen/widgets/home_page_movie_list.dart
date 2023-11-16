@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constants/constants.dart';
+import 'package:netflix_clone/domain/new&hot/models/everyone_watching_models/result.dart';
 import 'package:netflix_clone/presentation/widgets/common_image_card_wiget.dart';
 import 'package:netflix_clone/presentation/widgets/main_titile_widget.dart';
 
 class HomePageMovieList extends StatelessWidget {
   String movieTitle;
-  String imageLink;
+  List<HotandNewModelData> data;
   HomePageMovieList(
-      {super.key, required this.movieTitle, required this.imageLink});
+      {super.key, required this.movieTitle, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +20,11 @@ class HomePageMovieList extends StatelessWidget {
         LimitedBox(
           maxHeight: mwidth * .53,
           child: ListView.separated(
-            itemCount: 10,
+            itemCount: data.length,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) {
               return CommonImageWidget(
-                imageLink: imageLink,
+                imageLink: data[index].getPosterPath,
                 imageSize: Size(mwidth * .35, 0),
               );
             },

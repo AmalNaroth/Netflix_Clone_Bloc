@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:netflix_clone/core/constants/constants.dart';
+import 'package:netflix_clone/domain/new&hot/models/everyone_watching_models/result.dart';
 
 class EveryOneWatchingWidget extends StatelessWidget {
-  const EveryOneWatchingWidget({super.key});
+  HotandNewModelData everyoneWatchingData;
+
+  EveryOneWatchingWidget({super.key, required this.everyoneWatchingData});
 
   @override
   Widget build(BuildContext context) {
@@ -10,14 +13,13 @@ class EveryOneWatchingWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Friends",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          everyoneWatchingData.originalName!,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         fHight10,
         Text(
-          "mfkencj fceuhcn eudhfcu dcuinudfnc euhdncensd ceuidfnchnds cvhniednvc dsnc djsncjn cjhid cnsdcujhnds" +
-              "jcmi jic ijcidjci dijcim",
-          style: TextStyle(color: Colors.grey),
+          everyoneWatchingData.overview!,
+          style: const TextStyle(color: Colors.grey),
         ),
         fHight40,
         SizedBox(
@@ -28,7 +30,22 @@ class EveryOneWatchingWidget extends StatelessWidget {
             children: [
               Image(
                 image: NetworkImage(
-                    "https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/yj2SVz5I2HuQD84g633W2tijtKi.jpg"),
+                  everyoneWatchingData.getBackDropPath,
+                ),
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) {
+                    return child;
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  return const Center(
+                    child: Icon(Icons.network_check_outlined),
+                  );
+                },
                 fit: BoxFit.cover,
               ),
               Positioned(
@@ -36,14 +53,14 @@ class EveryOneWatchingWidget extends StatelessWidget {
                 right: 20,
                 child: CircleAvatar(
                   backgroundColor: Colors.black.withOpacity(.9),
-                  child: Icon(Icons.volume_off),
+                  child: const Icon(Icons.volume_off),
                 ),
               )
             ],
           ),
         ),
         fHight20,
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
